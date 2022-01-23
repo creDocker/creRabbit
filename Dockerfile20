@@ -77,8 +77,12 @@ RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') &&
 
 COPY cre /cre
 WORKDIR /cre/ 
+## RABBITMQ_PLUGINS_DIR works only with hardcoded version for now....
 # ENV RABBITMQ_HOME /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/
-ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION2/plugins
+##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION2/plugins
+##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
+ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${rabbitmqctl version | sed -e 's|RabbitMQ version:||'}/plugins
+
 ##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/plugins
 ##RUN export RABBITMQ_PLUGINS_DIR=/cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION2/plugins
 # :/usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins
