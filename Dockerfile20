@@ -82,8 +82,9 @@ RUN RABBITMQ_VERSION5=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||' | c
 
 COPY cre /cre
 WORKDIR /cre/ 
-# ENV RABBITMQ_HOME /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.2/
-ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
+# ENV RABBITMQ_HOME /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/
+##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
+ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/plugins
 # :/usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins
 
 # delay plugin     (3.8.9 -> 20.04?)
