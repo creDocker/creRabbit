@@ -65,7 +65,7 @@ RUN apt update  -y  && apt install -y rabbitmq-server=3.8.\* \
 # RUN rabbitmq-diagnostics status --help
 
 
-# RUN ls -l /usr/lib/rabbitmq/lib
+RUN ls -l /usr/lib/rabbitmq/lib
 # RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.2/plugins
 
 # node needs to run...
@@ -77,7 +77,7 @@ RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') &&
 COPY cre /cre
 WORKDIR /cre/ 
 # ENV RABBITMQ_HOME /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.2/
-ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.8.19/plugins
+ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
 # :/usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins
 
 # delay plugin     (3.8.9 -> 20.04?)
