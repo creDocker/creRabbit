@@ -15,7 +15,8 @@ ARG BUILD_TAG=latest
 
 # version: yyyy.n for stable versions / 0.yyyy for development
 ENV INITRD No
-ENV RABBITMQ_VERSION 3.8.27   # 3.6.0
+ENV RABBITMQ_VERSION 3.8.27  
+# 3.6.0
 
  
 LABEL Name="RabbitMQ for CRE" \
