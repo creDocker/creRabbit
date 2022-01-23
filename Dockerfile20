@@ -73,6 +73,9 @@ RUN ls -l /usr/lib/rabbitmq/lib
 # RUN rabbitmq-diagnostics erlang_version
 
 RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') && echo $RABBITMQ_VERSION2
+RUN RABBITMQ_VERSION3 = ($RABBITMQ_VERSION2)
+RUN RABBITMQ_VERSION4 = RABBITMQ_VERSION3[1]
+RUN echo RABBITMQ_VERSION4
 
 COPY cre /cre
 WORKDIR /cre/ 
