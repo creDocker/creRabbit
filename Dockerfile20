@@ -78,9 +78,9 @@ RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') &&
 COPY cre /cre
 WORKDIR /cre/ 
 # ENV RABBITMQ_HOME /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/
-##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
+ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION2/plugins
 ##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/plugins
-RUN export RABBITMQ_PLUGINS_DIR=/cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
+##RUN export RABBITMQ_PLUGINS_DIR=/cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION2/plugins
 # :/usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins
 RUN echo $RABBITMQ_PLUGINS_DIR
 
@@ -92,7 +92,8 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 
 ## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
    
-
+## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
+#
 RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.17/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
 # RUN cp /cre/plugins/v3.8/rabbitmq_delayed_message_exchange-3.8.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez 
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
