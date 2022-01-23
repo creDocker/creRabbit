@@ -73,19 +73,16 @@ RUN ls -l /usr/lib/rabbitmq/lib
 # RUN rabbitmq-diagnostics erlang_version
 
 RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') && echo $RABBITMQ_VERSION2
-#RUN RABBITMQ_VERSION3 = ($RABBITMQ_VERSION2)
-#RUN RABBITMQ_VERSION4 = ${RABBITMQ_VERSION3[1]}
-#RUN echo RABBITMQ_VERSION4
-
-RUN RABBITMQ_VERSION5=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||' | cut -d' ' -f2) && echo $RABBITMQ_VERSION5
 
 
 COPY cre /cre
 WORKDIR /cre/ 
 # ENV RABBITMQ_HOME /usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/
 ##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
-ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/plugins
+##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-3.8.27/plugins
+RUN export RABBITMQ_PLUGINS_DIR=/cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
 # :/usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins
+RUN echo $RABBITMQ_PLUGINS_DIR
 
 # delay plugin     (3.8.9 -> 20.04?)
 # https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez
