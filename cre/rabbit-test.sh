@@ -24,7 +24,8 @@ if [ $isInFile -eq 0 ]; then
     #exit 1
 fi
 
-shoreman /cre/rabbitmq-procfile &
+#procfile needs glue...
+#shoreman /cre/rabbitmq-procfile &
 
 sleep 2
 
