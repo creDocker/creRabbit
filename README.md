@@ -1,0 +1,2 @@
+# creRabbit
+RabbitMQ for CRE
