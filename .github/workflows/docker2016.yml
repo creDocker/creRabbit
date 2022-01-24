@@ -30,12 +30,12 @@ jobs:
         with:
           file: ./Dockerfile16
           push: true
-          tags: tamboraorg/creerlang:check16 
+          tags: tamboraorg/crerabbitmq:check16 
 
       -
         name: Test
         run: |
-          docker run tamboraorg/creerlang:check16 /cre/erlang-test.sh   
+          docker run tamboraorg/crerabbitmq:check16 /cre/rabbit-test.sh   
 
       -
         name: Build and push
@@ -44,6 +44,6 @@ jobs:
         with:
           file: ./Dockerfile16
           push: true
-          tags: tamboraorg/creerlang:2016.0 
+          tags: tamboraorg/crerabbitmq:2016.0 
       
 
