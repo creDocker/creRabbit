@@ -77,6 +77,8 @@ RUN rabbitmq-plugins enable rabbitmq_web_mqtt
 
 RUN rabbitmq-plugins list
 
+#RUN rabbitmqadmin -v
+
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
     echo "$(date +'%F %R') \t rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt 
 
