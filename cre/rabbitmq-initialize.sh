@@ -8,6 +8,7 @@ echo "rabbitmq server running"
 
 wget http://127.0.0.1:15672/cli/rabbitmqadmin
 chmod +x rabbitmqadmin
+ls (ls -l)
 mv rabbitmqadmin /etc/rabbitmq
 
 #munchausen-swamp
