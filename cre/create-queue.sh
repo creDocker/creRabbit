@@ -9,8 +9,12 @@ exchange=$(echo $line | jq -r '.exchange' )
 binding=$(echo $line | jq -r '.binding' )
 queue=$(echo $line | jq -r '.queue' )
 
-/etc/rabbitmq/rabbitmqadmin declare exchange name=$exchange type=direct  durable=false auto_delete=true
-/etc/rabbitmq/rabbitmqadmin declare queue name=$queue durable=false auto_delete=true
+delayed=$(/usr/sbin/rabbitmq-plugins list -E rabbitXmq_delayed_message_exchange | grep rabbitXmq_delayed_message_exchange)
+echo $delayed 
+
+#/etc/rabbitmq/rabbitmqadmin declare exchange name=$exchange type=direct durable=true auto_delete=false
+/etc/rabbitmq/rabbitmqadmin declare exchange name=$exchange type=x-delayed-message arguments={"x-delayed-type":"direct"} durable=true auto_delete=false
+/etc/rabbitmq/rabbitmqadmin declare queue name=$queue durable=true auto_delete=false
 /etc/rabbitmq/rabbitmqadmin declare binding source=$exchange destination=$queue routing_key=$binding 
  
 
