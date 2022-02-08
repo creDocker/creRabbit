@@ -41,6 +41,7 @@ rabbit_pwd="${rabbit_pwd:0:32}"
 {{ end }}
 
 rabbitmqctl add_user "$rabbit_user" "$rabbit_pwd"
+#rabbitmqctl set_user_tags "$rabbit_user" management
 rabbitmqctl set_permissions "$rabbit_user" ".*" ".*" ".*"
 
 {{ end }} 
