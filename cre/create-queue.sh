@@ -17,7 +17,10 @@ else
     /etc/rabbitmq/rabbitmqadmin declare exchange name=$exchange type=x-delayed-message arguments='{"x-delayed-type":"direct"}' durable=true auto_delete=false 
 fi
 
-/etc/rabbitmq/rabbitmqadmin declare queue name=$queue durable=true auto_delete=false
+# /etc/rabbitmq/rabbitmqadmin declare queue name=$queue durable=true auto_delete=false
+# Deathletter
+/etc/rabbitmq/rabbitmqadmin declare queue name=$queue arguments='{"x-dead-letter-exchange": "cre.deathletter", "x-dead-letter-routing-key": "cre.deathletter"}' durable=true auto_delete=false
+
 /etc/rabbitmq/rabbitmqadmin declare binding source=$exchange destination=$queue routing_key=$binding 
  
 
