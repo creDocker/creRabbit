@@ -41,8 +41,10 @@ RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic ma
 #list available packages
 RUN apt list -a rabbitmq-server
 
-RUN apt update  -y  && apt install -y rabbitmq-server=3.8.\* \
- && rabbitmq-plugins enable rabbitmq_management
+RUN apt update -y
+## RUN apt install -y rabbitmq-server=3.8.\* 
+RUN apt install -y rabbitmq-server
+RUN rabbitmq-plugins enable rabbitmq_management
 
 # works
 # RUN rabbitmq-plugins list
