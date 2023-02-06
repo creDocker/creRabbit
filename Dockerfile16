@@ -39,13 +39,12 @@ LABEL Name="RabbitMQ for CRE" \
 ## RUN echo "deb https://dl.bintray.com/rabbitmq-erlang/debian focal erlang-22.x" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 
 #--- Ubuntu 20.04 NEW ---
-RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
-RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
-RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
-RUN apt install apt-transport-https -y \
-RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
-RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ focal main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
-
+#RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
+#RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
+#RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
+#RUN apt install apt-transport-https -y \
+#RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+#RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ focal main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 
 # --- Ubuntu 18.04 ---
 # RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
@@ -54,6 +53,14 @@ RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ focal mai
 # RUN apt install apt-transport-https -y \
 # RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu bionic main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 # RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+
+# --- Ubuntu 16.04 ---
+RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
+RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
+RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
+RUN apt install apt-transport-https -y \
+RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu xenial main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ xenial main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 
 #list available packages
 RUN apt list -a rabbitmq-server
