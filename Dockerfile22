@@ -71,6 +71,9 @@ RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-3.9.13/plugins
 
 RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') && echo $RABBITMQ_VERSION2
 
+# config file -> timeout
+COPY cre/rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
+ENV RABBITMQ_CONFIG_FILE /etc/rabbitmq/rabbitmq.conf
 
 COPY cre /cre
 WORKDIR /cre/ 
