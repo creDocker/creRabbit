@@ -52,7 +52,8 @@ RUN apt list -a rabbitmq-server
 
 RUN apt update  -y 
 ## RUN apt install -y rabbitmq-server=3.8.\* 
-RUN apt install -y rabbitmq-server
+#RUN apt install -y rabbitmq-server
+RUN apt install -y rabbitmq-server=3.10.\* 
 RUN rabbitmq-plugins enable rabbitmq_management
 
 # works

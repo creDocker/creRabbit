@@ -41,8 +41,9 @@ RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ focal mai
 #list available packages
 RUN apt list -a rabbitmq-server
 
-RUN apt update  -y  && apt install -y rabbitmq-server=3.8.\* \
- && rabbitmq-plugins enable rabbitmq_management
+RUN apt update  -y  
+RUN apt install -y rabbitmq-server
+RUN rabbitmq-plugins enable rabbitmq_management
 
 # works
 # RUN rabbitmq-plugins list
@@ -69,11 +70,13 @@ ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RAB
 ##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
 RUN echo $RABBITMQ_PLUGINS_DIR
 
+# https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.11.1/rabbitmq_delayed_message_exchange-3.11.1.ez
+
 # delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.11.1
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 #
-RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.11.1/rabbitmq_delayed_message_exchange-3.11.1.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
-RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.17/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+## RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
 RUN rabbitmq-plugins enable rabbitmq_mqtt
