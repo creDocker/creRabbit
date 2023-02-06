@@ -86,18 +86,18 @@ ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RAB
 # :/usr/lib/rabbitmq/plugins:$RABBITMQ_HOME/plugins
 RUN echo $RABBITMQ_PLUGINS_DIR
 
-# delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.8.17.8f537ac
+# delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.9.0
 # https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez
 # https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez
 # https://bintray.com/rabbitmq/community-plugins/download_file?file_path=rabbitmq_delayed_message_exchange-0.0.1.ez
 # https://dl.bintray.com/rabbitmq/community-plugins/3.6.x/rabbitmq_delayed_message_exchange/rabbitmq_delayed_message_exchange-20171215-3.6.x.zip  -> ez
 
-## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.9.0/rabbitmq_delayed_message_exchange-3.9.0.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
    
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 #
-RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.17/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
-# RUN cp /cre/plugins/v3.8/rabbitmq_delayed_message_exchange-3.8.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez 
+RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.9.0/rabbitmq_delayed_message_exchange-3.9.0.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+# RUN cp /cre/plugins/v3.9/rabbitmq_delayed_message_exchange-3.9.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez 
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
