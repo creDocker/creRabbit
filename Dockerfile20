@@ -75,14 +75,14 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 # delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.11.1
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 #
-## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
-RUN cp /cre/plugins/v3.8/rabbitmq_delayed_message_exchange-3.8.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez
-## RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+## RUN cp /cre/plugins/v3.8/rabbitmq_delayed_message_exchange-3.8.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez
+RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
 ### TODO ###
-## RUN rabbitmq-plugins enable rabbitmq_mqtt
-## RUN rabbitmq-plugins enable rabbitmq_web_mqtt
+RUN rabbitmq-plugins enable rabbitmq_mqtt
+RUN rabbitmq-plugins enable rabbitmq_web_mqtt
 
 RUN rabbitmq-plugins list
 

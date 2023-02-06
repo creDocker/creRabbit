@@ -15,8 +15,8 @@ ARG BUILD_TAG=latest
 
 # version: yyyy.n for stable versions / 0.yyyy for development
 ENV INITRD No
-ENV RABBITMQ_VERSION 3.8.27 
-ENV RABBIT_DELAY_VERSION 3.8.17.8f537ac 
+ENV RABBITMQ_VERSION 3.5.7 
+ENV RABBIT_DELAY_VERSION 3.5.0 
 # 3.6.0
 
  
