@@ -5,4 +5,4 @@ creBuild 	 2023.02
   Java 	 openjdk version "1.8.0_292"
   Python3 	 Python 3.5.2
  erlang 	 "18"
- rabbitMq 	 Status of node rabbit@buildkitsandbox ...
+ rabbitMq 	 rabbitmq_server-3.5.7
