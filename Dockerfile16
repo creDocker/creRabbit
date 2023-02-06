@@ -121,8 +121,8 @@ RUN cp /cre/plugins/v0.0/rabbitmq_delayed_message_exchange-0.0.1.ez /cre/plugins
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
 ### TODO ###
-RUN rabbitmq-plugins enable rabbitmq_mqtt
-RUN rabbitmq-plugins enable rabbitmq_web_mqtt
+### RUN rabbitmq-plugins enable rabbitmq_mqtt
+### RUN rabbitmq-plugins enable rabbitmq_web_mqtt
 
 RUN rabbitmq-plugins list
 

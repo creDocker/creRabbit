@@ -16,7 +16,7 @@ ARG BUILD_TAG=latest
 # version: yyyy.n for stable versions / 0.yyyy for development
 ENV INITRD No
 ENV RABBITMQ_VERSION 3.6.10 
-ENV RABBIT_DELAY_VERSION 0.0.0
+ENV RABBIT_DELAY_VERSION 3.6.0
 # 3.6.0
 
  
@@ -66,14 +66,11 @@ ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RAB
 ##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
 RUN echo $RABBITMQ_PLUGINS_DIR
 
-# delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.8.17.8f537ac
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 #
-## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.17/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
-RUN cp /cre/plugins/v0.0/rabbitmq_delayed_message_exchange-0.0.1.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez
+RUN cp /cre/plugins/v3.6.0/rabbitmq_delayed_message_exchange-3.6.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez
 ### TODO ### 
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
-
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
 RUN rabbitmq-plugins enable rabbitmq_mqtt
