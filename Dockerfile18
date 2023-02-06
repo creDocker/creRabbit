@@ -84,7 +84,7 @@ RUN rabbitmq-plugins list
 
 
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t rabbitMq \t $(ls /usr/lib/rabbitmq/lib)" >> /cre/versions.txt 
+    echo "$(date +'%F %R') \t rabbitMq \t $(ls /usr/lib/rabbitmq/lib | sed -e 's|rabbitmq_server-||')" >> /cre/versions.txt 
 
 EXPOSE 15672 15675 5672 25672 1883   
 #  4369 5671 5672 15691 15692 
