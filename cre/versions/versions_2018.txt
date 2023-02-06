@@ -1,6 +1,8 @@
-creBuild 	 2023.01
+creBuild 	 2023.02
  creUbuntu 	 18.04.6 LTS
+  UbuntuName 	 bionic
   OpenSSL 1.1.1  11 Sep 2018
   Java 	 openjdk version "1.8.0_352"
   Python3 	 Python 3.6.9
  erlang 	 "25"
+ rabbitMq 	 3.11.8
