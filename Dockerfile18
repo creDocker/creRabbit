@@ -15,8 +15,8 @@ ARG BUILD_TAG=latest
 
 # version: yyyy.n for stable versions / 0.yyyy for development
 ENV INITRD No
-ENV RABBITMQ_VERSION 3.8.27 
-ENV RABBIT_DELAY_VERSION 3.8.17.8f537ac 
+ENV RABBITMQ_VERSION 3.6.10 
+ENV RABBIT_DELAY_VERSION 3.6.17.8f537ac 
 # 3.6.0
 
  
@@ -31,18 +31,18 @@ LABEL Name="RabbitMQ for CRE" \
 # Install RabbitMQ
 
 # --- Ubuntu 18.04 ---
-RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
-RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
-RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
-RUN apt install apt-transport-https -y \
-RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu bionic main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
-RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+## RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
+## RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
+## RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
+## RUN apt install apt-transport-https -y \
+## RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu bionic main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+## RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ bionic main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 
 #list available packages
 RUN apt list -a rabbitmq-server
 
 RUN apt update -y
-## RUN apt install -y rabbitmq-server=3.8.\* 
+## RUN apt install -y rabbitmq-server=3.6.\* 
 RUN apt install -y rabbitmq-server
 RUN rabbitmq-plugins enable rabbitmq_management
 
@@ -69,7 +69,10 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 # delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.8.17.8f537ac
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 #
-RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.17/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.17/rabbitmq_delayed_message_exchange-3.8.17.8f537ac.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+# RUN cp /cre/plugins/v3.6/rabbitmq_delayed_message_exchange-20171215-3.6.x.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez 
+RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
 ## RUN rabbitmq-plugins enable rabbitmq_mqtt
