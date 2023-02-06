@@ -70,7 +70,7 @@ RUN apt list -a rabbitmq-server
 
 # RUN apt update  -y  && apt install -y rabbitmq-server=3.8.\* \
 # && rabbitmq-plugins enable rabbitmq_management
-RUN sudo apt-get update -y  && apt-get install -y rabbitmq-server \
+RUN apt-get update -y  && apt-get install -y rabbitmq-server \
  && rabbitmq-plugins enable rabbitmq_management
 
 
