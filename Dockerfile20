@@ -79,8 +79,9 @@ RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/
 ## RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
-RUN rabbitmq-plugins enable rabbitmq_mqtt
-RUN rabbitmq-plugins enable rabbitmq_web_mqtt
+### TODO ###
+## RUN rabbitmq-plugins enable rabbitmq_mqtt
+## RUN rabbitmq-plugins enable rabbitmq_web_mqtt
 
 RUN rabbitmq-plugins list
 
