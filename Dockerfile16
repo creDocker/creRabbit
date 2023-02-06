@@ -126,7 +126,7 @@ RUN rabbitmq-plugins list
 
 
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt 
+    echo "$(date +'%F %R') \t rabbitMq \t $(rabbitmqctl status | grep RabbitMQ | grep rabbitmq)" >> /cre/versions.txt 
 
 EXPOSE 15672 15675 5672 25672 1883   
 #  4369 5671 5672 15691 15692 
