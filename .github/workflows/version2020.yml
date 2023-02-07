@@ -27,10 +27,12 @@ jobs:
       - name: cp version.txt
 #        run: (cp /cre/versions.txt cre/versions/versions_2020.txt) 
         run: (cut -f2,3 /cre/versions.txt > cre/versions/versions_2020.txt)
+      - name: download plugins
+        run: (/cre/rabbit-plugins.sh) 
       - name: Submit changes       
         uses: EndBug/add-and-commit@v9
         with:
 #          pull: '--rebase --autostash ...'
-          add: 'cre/versions/versions_2020.txt'   
+          add: 'cre/versions/versions_2020.txt cre/plugins/*/*.ez'   
           tag_push: '--force'   
 
