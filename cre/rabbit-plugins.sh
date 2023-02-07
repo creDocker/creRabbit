@@ -13,7 +13,7 @@ if [ ! -f "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange
     echo "Delayed Message Plugin v$RABBIT_DELAY_VERSION will be downloaded."
     wget "https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" -O "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange.tmp.ez"
     PLUGINSIZE=$(stat -c%s "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange.tmp.ez")
-    if [ (( $PLUGINSIZE > 1000)) ]; then
+    if [ $(echo " $PLUGINSIZE > 1000" | bc) -eq 1 ]; then
         mv "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange.tmp.ez" "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez"
     else
         echo "Delayed Message Plugin v$RABBIT_DELAY_VERSION does not exist."         
