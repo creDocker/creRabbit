@@ -30,34 +30,32 @@ LABEL Name="RabbitMQ for CRE" \
 
 # Install RabbitMQ
 
+### --- Install latest version vs official version ---
 #--- Ubuntu 20.04 NEW ---
 ## RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
 ## RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
 ## RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
 ## RUN apt install apt-transport-https -y \
-## RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
-## RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ focal main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+## RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+## RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 
 #list available packages
 RUN apt list -a rabbitmq-server
 
-RUN apt update  -y  
-RUN apt install -y rabbitmq-server
-RUN rabbitmq-plugins enable rabbitmq_management
+## RUN apt update  -y  && apt install -y rabbitmq-server=3.8.\* && rabbitmq-plugins enable rabbitmq_management
+RUN apt update -y  && apt install -y rabbitmq-server && rabbitmq-plugins enable rabbitmq_management
 
 # works
 # RUN rabbitmq-plugins list
 # RUN rabbitmq-diagnostics help
 # RUN rabbitmq-diagnostics status --help
 
-RUN ls -l /usr/lib/rabbitmq/lib
+# RUN ls -l /usr/lib/rabbitmq/lib
+# RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
 
 # node needs to run...
 # RUN rabbitmq-diagnostics environment
 # RUN rabbitmq-diagnostics erlang_version
-
-RUN RABBITMQ_VERSION2=$(rabbitmqctl version | sed -e 's|RabbitMQ version:||') && echo $RABBITMQ_VERSION2
-
 
 # config file -> timeout
 COPY cre/rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
@@ -65,16 +63,12 @@ ENV RABBITMQ_CONFIG_FILE /etc/rabbitmq/rabbitmq.conf
 
 COPY cre /cre
 WORKDIR /cre/ 
-## RABBITMQ_PLUGINS_DIR works only with hardcoded version for now....
+
 ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
-##ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-${RABBITMQ_VERSION2}/plugins
 RUN echo $RABBITMQ_PLUGINS_DIR
 
-# https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.11.1/rabbitmq_delayed_message_exchange-3.11.1.ez
-
-# delay plugin     (3.8.9 -> 20.04?)   use  ENV RABBIT_DELAY_VERSION 3.11.1
+# delay plugin  
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
-#
 ## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
 RUN cp /cre/plugins/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
