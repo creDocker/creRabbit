@@ -31,8 +31,6 @@ jobs:
         run: (/cre/rabbit-plugins.sh) 
       - name: check changes
         run: (git status) 
-      - name: check changes2
-        run: (git diff cre/plugins/v3.10.2/rabbitmq_delayed_message_exchange-3.10.2.ez) 
       - name: Submit changes       
         uses: EndBug/add-and-commit@v9
         with:
