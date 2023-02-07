@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "Current dir: $(pwd)"
-echo "Current env: $(env)"
-currentRoot="/"
+#echo "Current env: $(env)"
+currentRoot=""
 if [ ! -z $GITHUB_REPOSITORY ]; then
     currentRoot="$(pwd)"
 fi
@@ -10,7 +10,7 @@ fi
 echo "checking for $currentRoot/cre/plugins/v$RABBIT_DELAY_VERSION"
 
 # create directory if not exists
-if [ ! -f "$currentRoot/cre/plugins/v$RABBIT_DELAY_VERSION" ]; then
+if [ ! -d "$currentRoot/cre/plugins/v$RABBIT_DELAY_VERSION" ]; then
     echo "Plugin Directory v$RABBIT_DELAY_VERSION will be created."
     mkdir -p "$currentRoot/cre/plugins/v$RABBIT_DELAY_VERSION"
 else
