@@ -87,8 +87,8 @@ RUN rabbitmq-plugins enable rabbitmq_web_mqtt
 RUN rabbitmq-plugins list
 
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt 
-    echo "$(date +'%F %R') \t rabbitMq \t  $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt 
+    echo "$(date +'%F %R') \t rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t rabbitMq \t  $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
     echo "$(date +'%F %R') \t rabbitMq \t  $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
 
 EXPOSE 15672 15675 5672 25672 1883   
