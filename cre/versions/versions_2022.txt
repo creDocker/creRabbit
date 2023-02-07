@@ -6,3 +6,5 @@ creBuild 	 2023.02
   Python3 	 Python 3.10.6
  erlang 	 "24"
  rabbitMq 	 3.9.13
+ rabbitMq 	  [E ] rabbitmq_delayed_message_exchange 3.9.0
+ rabbitMq 	  [E ] rabbitmq_mqtt                     3.9.13
