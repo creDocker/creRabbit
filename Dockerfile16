@@ -96,7 +96,7 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 RUN rabbitmq-plugins list
 
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t  rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt 
+    echo "$(date +'%F %R') \t  rabbitMq \t $(ls /usr/lib/rabbitmq/lib | sed -e 's|rabbitmq_server-||')" >> /cre/versions.txt 
 ##    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
 ##    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
 
