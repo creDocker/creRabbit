@@ -76,8 +76,8 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 
 # delay plugin    
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
-## RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.9.0/rabbitmq_delayed_message_exchange-3.9.0.ez -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
-RUN cp /cre/plugins/v3.9.0/rabbitmq_delayed_message_exchange-3.9.0.ez /cre/plugins/rabbitmq_delayed_message_exchange.ez 
+## RUN wget "https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+RUN cp "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" /cre/plugins/rabbitmq_delayed_message_exchange.ez 
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 # https://www.rabbitmq.com/web-mqtt.html  ##port:15675
@@ -87,9 +87,9 @@ RUN rabbitmq-plugins enable rabbitmq_web_mqtt
 RUN rabbitmq-plugins list
 
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t rabbitMq \t  $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t rabbitMq \t  $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
+    echo "$(date +'%F %R') \t  rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
 
 EXPOSE 15672 15675 5672 25672 1883   
 #  4369 5671 5672 15691 15692 
