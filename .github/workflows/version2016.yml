@@ -29,8 +29,6 @@ jobs:
         run: (cut -f2,3 /cre/versions.txt > cre/versions/versions_2016.txt)
       - name: download plugins
         run: (/cre/rabbit-plugins.sh) 
-      - name: check changes
-        run: (git status) 
       - name: Submit changes       
         uses: EndBug/add-and-commit@v9
         with:
