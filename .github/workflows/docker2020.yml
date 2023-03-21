@@ -34,12 +34,12 @@ jobs:
         with:
           file: ./Dockerfile20
           push: true
-          tags: tamboraorg/crerabbitmq:check20 
+          tags: credocker/crerabbitmq:check20 
 
       -
         name: Test
         run: |
-          docker run tamboraorg/crerabbitmq:check20 /cre/rabbit-test.sh   
+          docker run credocker/crerabbitmq:check20 /cre/rabbit-test.sh   
 
       -
         name: Build and push
@@ -48,6 +48,6 @@ jobs:
         with:
           file: ./Dockerfile20
           push: true
-          tags: tamboraorg/crerabbitmq:2020.0, tamboraorg/crerabbitmq:latest 
+          tags: credocker/crerabbitmq:2020.0, credocker/crerabbitmq:latest 
       
 
