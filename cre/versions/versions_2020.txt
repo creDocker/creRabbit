@@ -4,7 +4,7 @@ creBuild 	 2024.01
   OpenSSL 1.1.1f  31 Mar 2020
   Java 	 openjdk version "11.0.21" 2023-10-17
   Python3 	 Python 3.8.10
-   Flask 	 Flask 3.0.0
+   Flask 	 Flask 3.0.1
  erlang 	 "22"
   rabbitMq 	 3.8.2
    [E ] rabbitmq_delayed_message_exchange 3.8.0
