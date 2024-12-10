@@ -1,0 +1,99 @@
+#
+# RabbitMQ Dockerfile
+#
+# https://github.com/tamboraorg/docker/crerabbitmq
+#
+
+# Pull base image. 
+FROM credocker/creerlang:2024.0
+
+MAINTAINER Michael Kahle <michael.kahle@yahoo.de> 
+
+ARG BUILD_YEAR=2024
+ARG BUILD_MONTH=0
+ARG BUILD_TAG=latest
+
+# version: yyyy.n for stable versions / 0.yyyy for development
+ENV INITRD No
+ENV RABBITMQ_VERSION 3.9.13 
+ENV RABBIT_DELAY_VERSION 3.9.0
+
+ 
+LABEL Name="RabbitMQ for CRE" \
+      CRE=$CRE_VERSION \ 
+      Year=$BUILD_YEAR \
+      Month=$BUILD_MONTH \
+      Version=$RABBITMQ_VERSION \
+      OS="Ubuntu:$UBUNTU_VERSION" \
+      Build_=$BUILD_TAG 
+
+# Install RabbitMQ
+
+# https://computingforgeeks.com/how-to-install-latest-rabbitmq-server-on-ubuntu-linux/
+# https://www.rabbitmq.com/install-debian.html#apt
+
+#--- Ubuntu 22.04 OLD ---
+# RUN apt install apt-transport-https -y \
+#  && wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add - 
+# RUN echo "deb https://dl.bintray.com/rabbitmq-erlang/debian $(lsb_release -cs) erlang-22.x" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+
+#--- Ubuntu 22.04 NEW ---
+## RUN apt-key adv --keyserver "hkps://keys.openpgp.org" --recv-keys "0x0A9AF2115F4687BD29803A206B73A36E6026DFCA"
+## RUN apt-key adv --keyserver "keyserver.ubuntu.com" --recv-keys "F77F1EDA57EBB1CC"
+## RUN curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo apt-key add -
+## RUN apt install apt-transport-https -y \
+## RUN echo "deb http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+## RUN echo "deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+
+
+#list available packages
+RUN apt list -a rabbitmq-server
+
+## RUN apt update  -y  && apt install -y rabbitmq-server=3.9.\* && rabbitmq-plugins enable rabbitmq_management
+RUN apt update -y  && apt install -y rabbitmq-server && rabbitmq-plugins enable rabbitmq_management
+
+# works
+# RUN rabbitmq-plugins list
+# RUN rabbitmq-diagnostics help
+# RUN rabbitmq-diagnostics status --help
+
+# RUN ls -l /usr/lib/rabbitmq/lib
+# RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
+
+# node needs to run...
+# RUN rabbitmq-diagnostics environment
+# RUN rabbitmq-diagnostics erlang_version
+
+# config file -> timeout
+COPY cre/rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
+ENV RABBITMQ_CONFIG_FILE /etc/rabbitmq/rabbitmq.conf
+
+COPY cre /cre
+WORKDIR /cre/ 
+
+ENV RABBITMQ_PLUGINS_DIR /cre/plugins:/usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
+RUN echo $RABBITMQ_PLUGINS_DIR
+
+# delay plugin    
+## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
+## RUN wget "https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
+RUN cp "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" /cre/plugins/rabbitmq_delayed_message_exchange.ez 
+RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+# https://www.rabbitmq.com/web-mqtt.html  ##port:15675
+RUN rabbitmq-plugins enable rabbitmq_mqtt
+RUN rabbitmq-plugins enable rabbitmq_web_mqtt
+
+RUN rabbitmq-plugins list
+
+RUN mkdir -p /cre && touch /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t  rabbitMq \t $(rabbitmqctl version)" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
+
+EXPOSE 15672 15675 5672 25672 1883   
+#  4369 5671 5672 15691 15692 
+
+ENTRYPOINT ["/cre/rabbitmq-entrypoint.sh"]
+
+CMD ["shoreman", "/cre/rabbitmq-procfile"]
