@@ -59,11 +59,11 @@ RUN apt update -y  && apt install -y rabbitmq-server && rabbitmq-plugins enable 
 
 
 # works
-# RUN rabbitmq-plugins list
+RUN rabbitmq-plugins list
 # RUN rabbitmq-diagnostics help
 # RUN rabbitmq-diagnostics status --help
 
-# RUN ls -l /usr/lib/rabbitmq/lib
+RUN ls -l /usr/lib/rabbitmq/lib
 # RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
 
 # node needs to run...
@@ -96,9 +96,9 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 RUN rabbitmq-plugins list
 
 RUN mkdir -p /cre && touch /cre/versions.txt && \ 
-    echo "$(date +'%F %R') \t  rabbitMq \t $(ls /usr/lib/rabbitmq/lib | sed -e 's|rabbitmq_server-||')" >> /cre/versions.txt 
-##    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
-##    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
+    echo "$(date +'%F %R') \t  rabbitMq \t $(ls /usr/lib/rabbitmq/lib | sed -e 's|rabbitmq_server-||')" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_delayed_message_exchange)" >> /cre/versions.txt && \ 
+    echo "$(date +'%F %R') \t   $(rabbitmq-plugins list | grep rabbitmq_mqtt)" >> /cre/versions.txt 
 
 EXPOSE 15672 15675 5672 25672 1883   
 #  4369 5671 5672 15691 15692 
