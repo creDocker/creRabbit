@@ -1,4 +1,4 @@
-creBuild 	 2024.01
+creBuild 	 2024.12
  creUbuntu 	 16.04.7 LTS
   UbuntuName 	 xenial
   OpenSSL 1.0.2g  1 Mar 2016
@@ -6,3 +6,5 @@ creBuild 	 2024.01
   Python3 	 Python 3.5.2
  erlang 	 "18"
   rabbitMq 	 3.5.7
+   
+   
