@@ -78,7 +78,7 @@ RUN echo $RABBITMQ_PLUGINS_DIR
 ## see versions at: https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases
 ## RUN wget "https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" -O /cre/plugins/rabbitmq_delayed_message_exchange.ez
 RUN cp "/cre/plugins/v$RABBIT_DELAY_VERSION/rabbitmq_delayed_message_exchange-$RABBIT_DELAY_VERSION.ez" /cre/plugins/rabbitmq_delayed_message_exchange.ez 
-## RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 RUN rabbitmq-plugins list
 
 
