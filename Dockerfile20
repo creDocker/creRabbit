@@ -46,12 +46,12 @@ RUN apt list -a rabbitmq-server
 RUN apt update -y  && apt install -y rabbitmq-server && rabbitmq-plugins enable rabbitmq_management
 
 # works
-# RUN rabbitmq-plugins list
-# RUN rabbitmq-diagnostics help
-# RUN rabbitmq-diagnostics status --help
+RUN rabbitmq-plugins list
+RUN rabbitmq-diagnostics help
+RUN rabbitmq-diagnostics status --help
 
-# RUN ls -l /usr/lib/rabbitmq/lib
-# RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
+RUN ls -l /usr/lib/rabbitmq/lib
+RUN ls -l /usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/plugins
 
 # node needs to run...
 # RUN rabbitmq-diagnostics environment
